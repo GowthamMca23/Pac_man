@@ -3,57 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PACMAN</title>
-    <style>
-        #container {
-            width: 2000px;
-            height: 200px;
-        
-            margin: 20px;
-        
-        }
-        #pac-right {
-            width: 200px;
-            height: 200px;
-            position: absolute;
-        }
-    </style>
+    <title>Document</title>
 </head>
 <body>
-    <div id="container">
-        <img id="pac-right" src="PacMan1.png">
-    </div>
+    <div id="box" style="height:500px; width:1000px; position:relative; "></div>
 
-    <script>
-        var container = document.getElementById("container");
-        var pacman1 = document.getElementById("pac-right");
-        var position = 0;
-        var direction = 1;
+<script>
+    var arr=[["PacMan1.png","PacMan2.png"],["PacMan3.png","PacMan4.png"]]
+    var img = document.createElement("img")
+    document.getElementById("box").appendChild(img)
+    var position=0;
+    var flag=0;
+    var direction=0;
 
-        function move() {
-     position += direction * 20;
+    function moving(){
+        img.src=arr[direction][flag]
 
-            if (position<0 || position>1000) {
-                direction *= -1;
-            }
- if (((position / 20) % 2) !== 0) {
-                if (direction === 1) {
-                    pacman1.src="PacMan2.png";
-                } else {
-                    pacman1.src="PacMan4.png";
-                }
-            } else {
-                if (direction === 1) {
-                    pacman1.src="PacMan1.png";
-                } else {
-                    pacman1.src="PacMan3.png";
-                }
-            }
- pacman1.style.left=position+ 'px';
+        if(direction===0){
+            position += 100
         }
+        else{
+            position -= 100
+        }
+        
+        if(position>1000 || position<0){
+            direction= 1-direction
+        }
+    
 
-        setInterval(move, 100);
-    </script>
+        flag= 1-flag
+        img.style.left=position+"px"
+        img.style.width="100px"
+        img.style.height="100px"
+        img.style.position="absolute"
+    }
+    setInterval(moving,300)
+</script>    
 </body>
 </html>
-
